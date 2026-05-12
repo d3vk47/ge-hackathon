@@ -26,4 +26,10 @@ bq load \
   "${TABLE_NAME}" \
   "${CSV_FILE}"
 
+echo "Creating the anomalies table in the ${DATASET_NAME} database"
+bq mk --table \
+    "${DATASET_NAME}".flagged_anomalies \
+    tx_id:STRING,timestamp:STRING,source:STRING,target:STRING,amount:FLOAT,anomaly_type:STRING,score:FLOAT
+
+
 echo "Batch processing complete."
